@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>うるおいトラッカー</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <header>
+            <h1>うるおいトラッカー</h1>
+            <p class="subtitle">うるトラ - 水分補給で健康に。</p>
+        </header>
+
+        <main>
+            <div class="visualization-container">
+                <div class="circle-progress">
+                    <div class="wave" id="wave"></div>
+                    <div class="percentage-text">
+                        <span id="current-intake">0</span><span class="unit">ml</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="controls">
+                <div class="preset-buttons">
+                    <button class="btn-preset" data-amount="120">
+                        <span class="icon">💧</span>
+                        <span class="label">120ml</span>
+                    </button>
+                    <button class="btn-preset" data-amount="250">
+                        <span class="icon">🥤</span>
+                        <span class="label">250ml</span>
+                    </button>
+                    <button class="btn-preset" data-amount="330">
+                        <span class="icon">🧃</span>
+                        <span class="label">330ml</span>
+                    </button>
+                    <button class="btn-preset" data-amount="500">
+                        <span class="icon">🍶</span>
+                        <span class="label">500ml</span>
+                    </button>
+                </div>
+
+                <div class="custom-input-container">
+                    <div class="slider-wrapper">
+                        <input type="range" id="custom-amount" min="0" max="1000" step="10" value="0">
+                        <div class="slider-value"><span id="slider-value-display">0</span>ml</div>
+                    </div>
+                    <button id="btn-add-custom" class="btn-primary">追加</button>
+                </div>
+
+                <div class="actions">
+                    <button id="btn-reset" class="btn-secondary">
+                        リセット
+                    </button>
+                    <p class="shake-hint">端末を振ってリセット 📳</p>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
