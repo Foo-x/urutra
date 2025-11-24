@@ -14,6 +14,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const appContainer = document.querySelector('.app-container');
 
     // Initialize
+    const savedIntake = localStorage.getItem('totalIntake');
+    if (savedIntake) {
+        totalIntake = parseInt(savedIntake);
+    }
     updateUI();
 
     // Event Listeners
@@ -44,6 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Functions
     function addIntake(amount) {
         totalIntake += amount;
+        saveData();
         updateUI();
         triggerFeedback();
     }
@@ -51,9 +56,14 @@ document.addEventListener('DOMContentLoaded', () => {
     function resetIntake() {
         if (confirm('摂取量をリセットしてもよろしいですか？')) {
             totalIntake = 0;
+            saveData();
             updateUI();
             triggerFeedback();
         }
+    }
+
+    function saveData() {
+        localStorage.setItem('totalIntake', totalIntake);
     }
 
     function updateUI() {
