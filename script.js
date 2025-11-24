@@ -111,12 +111,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (navigator.vibrate) {
             navigator.vibrate(50);
         }
-
-        // Visual shake effect on container
-        appContainer.classList.add('shaking');
-        setTimeout(() => {
-            appContainer.classList.remove('shaking');
-        }, 300);
     }
 
     // Shake Detection
