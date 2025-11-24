@@ -119,51 +119,5 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Shake Detection
-    let lastX = 0, lastY = 0, lastZ = 0;
-    let lastUpdate = 0;
-    const SHAKE_THRESHOLD = 15;
 
-    function handleMotion(event) {
-        const current = event.accelerationIncludingGravity;
-        if (!current) return;
-
-        const currentTime = new Date().getTime();
-        if ((currentTime - lastUpdate) > 100) {
-            const diffTime = currentTime - lastUpdate;
-            lastUpdate = currentTime;
-
-            const speed = Math.abs(current.x + current.y + current.z - lastX - lastY - lastZ) / diffTime * 10000;
-
-            if (speed > SHAKE_THRESHOLD * 100) { // Adjusted threshold logic
-                 // Simple debounce/check
-                 resetIntake();
-            }
-
-            lastX = current.x;
-            lastY = current.y;
-            lastZ = current.z;
-        }
-    }
-
-    // Request permission for iOS 13+ devices
-    if (typeof DeviceMotionEvent !== 'undefined' && typeof DeviceMotionEvent.requestPermission === 'function') {
-        // We need a user interaction to request permission.
-        // We can add a hidden or explicit button, or hook it to the first interaction.
-        // For this demo, we'll hook it to the body click once.
-        const requestPermission = () => {
-            DeviceMotionEvent.requestPermission()
-                .then(response => {
-                    if (response === 'granted') {
-                        window.addEventListener('devicemotion', handleMotion, true);
-                    }
-                })
-                .catch(console.error);
-            document.body.removeEventListener('click', requestPermission);
-        };
-        document.body.addEventListener('click', requestPermission);
-    } else {
-        // Non-iOS 13+ devices
-        window.addEventListener('devicemotion', handleMotion, true);
-    }
 });
