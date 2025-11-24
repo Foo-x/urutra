@@ -18,6 +18,14 @@ document.addEventListener('DOMContentLoaded', () => {
     if (savedIntake) {
         totalIntake = parseInt(savedIntake);
     }
+
+    // Restore custom slider value
+    const savedCustomAmount = localStorage.getItem('customAmount');
+    if (savedCustomAmount) {
+        customInput.value = savedCustomAmount;
+        sliderValueDisplay.textContent = savedCustomAmount;
+    }
+
     updateUI();
 
     // Event Listeners
@@ -37,9 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const amount = parseInt(customInput.value);
         if (amount > 0) {
             addIntake(amount);
-            // Reset slider to 0 after adding? Or keep it? Let's reset for better flow.
-            customInput.value = 0;
-            sliderValueDisplay.textContent = '0';
+            localStorage.setItem('customAmount', customInput.value);
         }
     });
 
