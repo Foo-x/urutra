@@ -5,7 +5,7 @@ const ASSETS_TO_CACHE = [
     './style.css',
     './script.js',
     './manifest.json',
-    './favicon.svg'
+    './favicon.png'
 ];
 
 // Install event
