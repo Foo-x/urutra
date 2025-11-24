@@ -5,7 +5,8 @@ const ASSETS_TO_CACHE = [
     './style.css',
     './script.js',
     './manifest.json',
-    './favicon.png'
+    './favicon.png',
+    './apple-touch-icon.png'
 ];
 
 // Install event
