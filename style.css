@@ -43,6 +43,7 @@ h1 {
     font-size: 2rem;
     font-weight: 700;
     background: linear-gradient(to right, var(--accent-color), var(--primary-color));
+    background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     margin-bottom: 0.5rem;
@@ -189,6 +190,7 @@ h1 {
 }
 
 input[type=range] {
+    appearance: none;
     -webkit-appearance: none;
     width: 100%;
     background: transparent;
@@ -222,6 +224,7 @@ input[type=range]::-webkit-slider-thumb {
     border-radius: 50%;
     background: var(--primary-color);
     cursor: pointer;
+    appearance: none;
     -webkit-appearance: none;
     margin-top: -6px; /* centers thumb on track */
     box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
@@ -310,4 +313,69 @@ input[type=range]::-moz-range-thumb:hover {
 
 .shaking {
     animation: shake 0.3s ease-in-out;
+}
+
+/* Modal Styles */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    backdrop-filter: blur(4px);
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+.modal-overlay.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.modal-content {
+    background-color: var(--card-bg);
+    padding: 2rem;
+    border-radius: 1.5rem;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    max-width: 90%;
+    width: 320px;
+    transform: translateY(0);
+    transition: transform 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.modal-overlay.hidden .modal-content {
+    transform: translateY(20px);
+}
+
+.modal-content h3 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-size: 1.25rem;
+}
+
+.modal-content p {
+    margin-bottom: 1.5rem;
+    color: var(--text-secondary);
+}
+
+.modal-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.modal-actions button {
+    flex: 1;
+    padding: 0.75rem;
+    border-radius: 0.75rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
 }

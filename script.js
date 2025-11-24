@@ -53,14 +53,40 @@ document.addEventListener('DOMContentLoaded', () => {
         triggerFeedback();
     }
 
+    // Modal Elements
+    const modal = document.getElementById('confirm-modal');
+    const btnModalCancel = document.getElementById('btn-modal-cancel');
+    const btnModalConfirm = document.getElementById('btn-modal-confirm');
+
     function resetIntake() {
-        if (confirm('摂取量をリセットしてもよろしいですか？')) {
-            totalIntake = 0;
-            saveData();
-            updateUI();
-            triggerFeedback();
-        }
+        showModal();
     }
+
+    function showModal() {
+        modal.classList.remove('hidden');
+    }
+
+    function hideModal() {
+        modal.classList.add('hidden');
+    }
+
+    function performReset() {
+        totalIntake = 0;
+        saveData();
+        updateUI();
+        triggerFeedback();
+        hideModal();
+    }
+
+    btnModalCancel.addEventListener('click', hideModal);
+    btnModalConfirm.addEventListener('click', performReset);
+
+    // Close modal when clicking outside
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            hideModal();
+        }
+    });
 
     function saveData() {
         localStorage.setItem('totalIntake', totalIntake);
