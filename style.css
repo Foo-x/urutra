@@ -342,3 +342,17 @@ h1 {
     cursor: pointer;
     transition: all 0.2s ease;
 }
+
+/* Responsive Adjustments */
+@media (max-width: 400px) {
+    .btn-adjust {
+        width: 32px;
+        height: 32px;
+        font-size: 0.7rem;
+    }
+
+    .custom-display {
+        min-width: 60px;
+        font-size: 1.25rem;
+    }
+}
