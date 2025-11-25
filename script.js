@@ -7,11 +7,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const intakeDisplay = document.getElementById('current-intake');
     const wave = document.getElementById('wave');
     const presetButtons = document.querySelectorAll('.btn-preset');
-    const customInput = document.getElementById('custom-amount');
-    const sliderValueDisplay = document.getElementById('slider-value-display');
+    const customAmountDisplay = document.getElementById('custom-amount-display');
     const btnAddCustom = document.getElementById('btn-add-custom');
     const btnReset = document.getElementById('btn-reset');
     const appContainer = document.querySelector('.app-container');
+    const adjustButtons = document.querySelectorAll('.btn-adjust');
 
     // Initialize
     const savedIntake = localStorage.getItem('totalIntake');
@@ -19,12 +19,13 @@ document.addEventListener('DOMContentLoaded', () => {
         totalIntake = parseInt(savedIntake);
     }
 
-    // Restore custom slider value
+    // Custom Amount State
+    let customAmount = 0;
     const savedCustomAmount = localStorage.getItem('customAmount');
     if (savedCustomAmount) {
-        customInput.value = savedCustomAmount;
-        sliderValueDisplay.textContent = savedCustomAmount;
+        customAmount = parseInt(savedCustomAmount);
     }
+    updateCustomDisplay();
 
     updateUI();
 
@@ -36,16 +37,24 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Slider value update
-    customInput.addEventListener('input', () => {
-        sliderValueDisplay.textContent = customInput.value;
+    // Custom Amount Adjusters
+    adjustButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const change = parseInt(btn.dataset.change);
+            customAmount += change;
+            if (customAmount < 0) customAmount = 0;
+            updateCustomDisplay();
+            localStorage.setItem('customAmount', customAmount);
+        });
     });
 
+    function updateCustomDisplay() {
+        customAmountDisplay.textContent = customAmount;
+    }
+
     btnAddCustom.addEventListener('click', () => {
-        const amount = parseInt(customInput.value);
-        if (amount > 0) {
-            addIntake(amount);
-            localStorage.setItem('customAmount', customInput.value);
+        if (customAmount > 0) {
+            addIntake(customAmount);
         }
     });
 
